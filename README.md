@@ -1,3 +1,9 @@
+Added `keepInputValue` to keep the hidden input's value on input change and `useInputNotLabels` to hide the .Select-value labels when we have an input value (as we're setting the input value.)
+
+To use, use `inputProps={{ value: 'whatever' }}` to set the input value. 
+
+
+
 [![NPM](https://img.shields.io/npm/v/react-select.svg)](https://www.npmjs.com/package/react-select)
 [![Build Status](https://travis-ci.org/JedWatson/react-select.svg?branch=master)](https://travis-ci.org/JedWatson/react-select)
 [![Coverage Status](https://coveralls.io/repos/JedWatson/react-select/badge.svg?branch=master&service=github)](https://coveralls.io/github/JedWatson/react-select?branch=master)

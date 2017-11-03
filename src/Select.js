@@ -551,7 +551,7 @@ class Select extends React.Component {
 			});
 		} else {
 			this.setState({
-				inputValue: this.handleInputValueChange(''),
+				inputValue: this.handleInputValueChange(this.props.keepInputValue ? value[this.props.labelKey] : ''),
 				isOpen: !this.props.closeOnSelect,
 				isPseudoFocused: this.state.isFocused,
 			}, () => {
@@ -723,9 +723,11 @@ class Select extends React.Component {
 	renderValue (valueArray, isOpen) {
 		let renderLabel = this.props.valueRenderer || this.getOptionLabel;
 		let ValueComponent = this.props.valueComponent;
+		if (this.props.useInputNotLabels && this.props.inputProps && this.props.inputProps.value) return null;
 		if (!valueArray.length) {
 			return !this.state.inputValue ? <div className="Select-placeholder">{this.props.placeholder}</div> : null;
 		}
+		if (this.props.useInputNotLabels) return null;
 		let onClick = this.props.onValueClick ? this.handleValueClick : null;
 		if (this.props.multi) {
 			return valueArray.map((value, i) => {
@@ -772,6 +774,7 @@ class Select extends React.Component {
 				&& !this.state.inputValue
 		});
 		const inputProps = {
+			value: this.state.inputValue,
 			...this.props.inputProps,
 			role: 'combobox',
 			'aria-expanded': '' + isOpen,
@@ -788,7 +791,6 @@ class Select extends React.Component {
 			onFocus: this.handleInputFocus,
 			ref: ref => this.input = ref,
 			required: this.state.required,
-			value: this.state.inputValue,
 		};
 
 		if (this.props.inputRenderer) {
@@ -1155,6 +1157,10 @@ Select.propTypes = {
 	valueKey: PropTypes.string,           // path of the label value in option objects
 	valueRenderer: PropTypes.func,        // valueRenderer: function (option) {}
 	wrapperStyle: PropTypes.object,       // optional style to apply to the component wrapper
+
+
+	keepInputValue: PropTypes.bool,
+	useInputNotLabels: PropTypes.bool,
 };
 
 Select.defaultProps = {
@@ -1173,11 +1179,13 @@ Select.defaultProps = {
 	escapeClearsValue: true,
 	filterOptions: defaultFilterOptions,
 	ignoreAccents: true,
+	useInputNotLabels: false,
 	ignoreCase: true,
 	inputProps: {},
 	isLoading: false,
 	joinValues: false,
 	labelKey: 'label',
+	keepInputValue: false,
 	matchPos: 'any',
 	matchProp: 'any',
 	menuBuffer: 0,
