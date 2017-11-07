@@ -408,6 +408,8 @@ class Select extends React.Component {
 				}
 			break;
 			case 32: // space
+				if (this.props.ignoreSpace) return;
+
 				if (!this.props.searchable) {
 					event.preventDefault();
 				}
@@ -1161,6 +1163,7 @@ Select.propTypes = {
 
 	keepInputValue: PropTypes.bool,
 	useInputNotLabels: PropTypes.bool,
+	ignoreSpace: PropTypes.bool,
 };
 
 Select.defaultProps = {
@@ -1209,6 +1212,7 @@ Select.defaultProps = {
  	trimFilter: true,
 	valueComponent: Value,
 	valueKey: 'value',
+	ignoreSpace: false,
 };
 
 export default Select;

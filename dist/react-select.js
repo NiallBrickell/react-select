@@ -1010,6 +1010,8 @@ var Select$1 = function (_React$Component) {
 					break;
 				case 32:
 					// space
+					if (this.props.ignoreSpace) return;
+
 					if (!this.props.searchable) {
 						event.preventDefault();
 					}
@@ -1462,8 +1464,7 @@ var Select$1 = function (_React$Component) {
 				onChange: this.handleInputChange,
 				onFocus: this.handleInputFocus,
 				ref: function ref(_ref) {
-					_this7.input = _ref;
-					if (_this7.props.inputRef) _this7.props.inputRef(_ref);
+					return _this7.input = _ref;
 				},
 				required: this.state.required
 			});
@@ -1852,8 +1853,8 @@ Select$1.propTypes = {
 
 
 	keepInputValue: PropTypes.bool,
-	inputRef: PropTypes.func,
-	useInputNotLabels: PropTypes.bool
+	useInputNotLabels: PropTypes.bool,
+	ignoreSpace: PropTypes.bool
 };
 
 Select$1.defaultProps = {
@@ -1894,7 +1895,6 @@ Select$1.defaultProps = {
 	placeholder: 'Select...',
 	removeSelected: true,
 	required: false,
-	inputRef: null,
 	rtl: false,
 	scrollMenuIntoView: true,
 	searchable: true,
@@ -1902,7 +1902,8 @@ Select$1.defaultProps = {
 	tabSelectsValue: true,
 	trimFilter: true,
 	valueComponent: Value,
-	valueKey: 'value'
+	valueKey: 'value',
+	ignoreSpace: false
 };
 
 var propTypes = {

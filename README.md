@@ -1,6 +1,8 @@
 Added `keepInputValue` to keep the hidden input's value on input change and `useInputNotLabels` to hide the .Select-value labels when we have an input value (as we're setting the input value.)
 
-To use, use `inputProps={{ value: 'whatever' }}` to set the input value. 
+To use, use `inputProps={{ value: 'whatever' }}` to set the input value.
+
+`ignoreSpace` makes space behave as a regular input instead of a select.
 
 
 
